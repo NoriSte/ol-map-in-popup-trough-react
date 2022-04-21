@@ -1,0 +1,126 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Extracted Map",
+  "steps": [
+    {
+      "file": "apps/route-manager/src/app/App.tsx",
+      "description": "All starts with `PopupRoot` that enables the app consuming an external popup.",
+      "line": 50
+    },
+    {
+      "file": "apps/route-manager/src/sections/routing/pages/home/components/RoutingView/components/SchedulerLayout.tsx",
+      "description": "From now on, every (previously-registered, stay tuned) section can render whatever it wants in the popup.",
+      "line": 18
+    },
+    {
+      "file": "apps/route-manager/src/sections/routing/pages/home/components/RoutingView/components/Popup.tsx",
+      "description": "`RenderInPopup` is the component that allows rendering the children directly inside the popup, through a React Portal.",
+      "line": 13,
+      "selection": {
+        "start": {
+          "line": 13,
+          "character": 6
+        },
+        "end": {
+          "line": 13,
+          "character": 19
+        }
+      }
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/components/RenderInPopup.tsx",
+      "description": "`RenderInPopup` does nothing but registering the passed children in a dedicated atom. The children will be rendered only when the popup opens.",
+      "line": 18
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/popupChildrenState.ts",
+      "description": "To ease following the children flow, every component that wants to render something in the popup must be known in advance.",
+      "line": 11
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/hooks/usePopupApi.ts",
+      "description": "`usePopupApi` is the bridge between the imperative-based popup lifecycle and the React world.",
+      "line": 14,
+      "selection": {
+        "start": {
+          "line": 14,
+          "character": 17
+        },
+        "end": {
+          "line": 14,
+          "character": 28
+        }
+      }
+    },
+    {
+      "file": "apps/route-manager/src/components/Header/components/MenuArea/components/RoutingLayoutDropdownMenu/hooks/useRoutingLayoutMenu.ts",
+      "description": "The users can open the Exctracted Map through the Layout dropdown menu.",
+      "line": 114
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/core/openPopup.ts",
+      "description": "Opening the popup means creating a new \"RouteManager\" popup.",
+      "line": 28,
+      "selection": {
+        "start": {
+          "line": 28,
+          "character": 33
+        },
+        "end": {
+          "line": 28,
+          "character": 56
+        }
+      }
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/core/createRouteManagerPopup.ts",
+      "description": "A \"RouteManager\" popup is an empty popup with a series of plugins that allow offering a seamless UX between the main window and the popup one.",
+      "line": 26
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/core/createEmptyPopup.ts",
+      "description": "The core popup code is nothiung but a call to `window.open` and some hooks connected to the popup events.",
+      "line": 146
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/plugins/createStyledPopupPlugin/createStyledPopupPlugin.ts",
+      "description": "Even if from a React perspective the children rendered in the popup are part of the main window render tree, from the browser perspective they are not. The styles of the main window must be manually cloned to the popup one.",
+      "line": 29
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/plugins/createStyledPopupPlugin/createStyledPopupPlugin.ts",
+      "description": "The same is valid for the dynamic styles, like the CSS-in-JS-related ones.",
+      "line": 36
+    },
+    {
+      "file": "apps/tracking-app/src/components/Map/components/MapContainer.tsx",
+      "description": "As soon as the popup opens, the map container moves the div inside it, without knowing it's placed in another window.",
+      "line": 77
+    },
+    {
+      "file": "apps/route-manager/src/map/atoms/map/hooks/useSyncMountMap.ts",
+      "description": "As a result, the new map target is now located in the popup window.",
+      "line": 19
+    },
+    {
+      "file": "apps/route-manager/src/map/components/MapTooltipController/components/OrderTooltip/components/SingleOrder/SingleOrder.tsx",
+      "description": "All the tooltips have a slight special behavior when rendered in the popup because of some render glitches found during the development.",
+      "line": 47
+    },
+    {
+      "file": "apps/route-manager/src/app/App.tsx",
+      "description": "If the user moves to the section that does not render anything in the popup, a generic fallback is used to not leave the map empty.",
+      "line": 52
+    },
+    {
+      "file": "apps/route-manager/src/atoms/popup/plugins/createMapPopupPlugin.ts",
+      "description": "Because of some odd behaviours when the map is moved back and forth from the main window and the popup one, as soon as the popup closes the map is immediately moved to an always-present div.",
+      "line": 50
+    },
+    {
+      "file": "apps/route-manager/src/map/atoms/map/hooks/useMountMap.ts",
+      "description": "And the map is moved to the new container only after a while.",
+      "line": 55
+    }
+  ]
+}
